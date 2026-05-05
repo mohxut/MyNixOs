@@ -7,7 +7,7 @@
 {
   imports =
     [ # Include the results of the hardware scan.
-      /etc/nixos/hardware-configuration.nix
+	./hardware-configuration.nix
     ];
 
   # Bootloader.
@@ -27,8 +27,8 @@
   
 
   # Enable networking
-  networking.hostName = "nano"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
+  networking.hostName = "mohx";  
   networking.networkmanager.enable = true;
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ]; 
@@ -103,6 +103,13 @@
    protonvpn-gui
    ];
 
+  programs.git = {
+  enable = true;
+  config = {
+    core.askPass = ""; # هذا سيعطل ظهور نافذة KDE المزعجة
+  };
+  };
+
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   # programs.mtr.enable = true;
@@ -133,7 +140,9 @@
   #UI*****************************************
   services.displayManager.sddm.enable = false;
    services.displayManager.ly = {
-    enable = true;};
+    enable = true;
+    };
+
   services.xserver.enable = true ;
 
   services.desktopManager.plasma6.enable = true;
@@ -180,11 +189,11 @@
 	  	  
   
 
+            };
+          };
         };
       };
     };
-  };
-};
 
 }
 

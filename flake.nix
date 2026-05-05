@@ -2,18 +2,26 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
-    flake-parts.url = "github:hercules-ci/flake-parts";
-    import-tree.url = "github:vic/import-tree";
-
-    wrapper-modules.url = "github:BirdeeHub/nix-wrapper-modules";
+    home-manager = {
+      url = "github:nix-community/home-manager/master";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-outputs = { self, nixpkgs, ... } @ inputs: {
+outputs = { self, nixpkgs, home-manager , ... }: {
     nixosConfigurations.nano = nixpkgs.lib.nixosSystem {
 	system = "x86_64-linux";
-	specialArgs = { inherit inputs; };
-      modules = [
-        ./configuration.nix
+	modules = [
+            ./configuration.nix
+	    home-manager.nixosModules.default
+            {
+              home-manager = {
+                useGlobalPkgs = true;
+                useUserPackages = true;
+                users.mohx = ./home.nix;
+		backupFileExtension = "backup" ;
+            };
+	}
       ];
     };
   };
