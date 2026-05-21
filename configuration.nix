@@ -100,8 +100,13 @@
    discord
    keyd
    tmux
-   protonvpn-gui
-   ];
+   proton-vpn
+   nodejs
+   home-manager
+   jetbrains.idea-oss
+   jdk25
+   lazygit
+];
 
   programs.git = {
   enable = true;
@@ -147,6 +152,7 @@
 
   services.desktopManager.plasma6.enable = true;
 
+
   programs.niri.enable = true ;
 
   services.pipewire = {
@@ -157,11 +163,13 @@
 
     };
 
-  xdg.portal = {
-    enable = true;
-    config.common.default = "*";
-    extraPortals = [ pkgs.xdg-desktop-portal-gnome ];
-  };
+  services.gnome.gnome-keyring.enable = false;
+
+ # xdg.portal = {
+##    enable = true;
+ #   extraPortals = [ pkgs.xdg-desktop-portal-gnome ];
+ #   config.common.default = [ "*" ];
+ # }; 
 
   services.keyd = {
     enable = true;
