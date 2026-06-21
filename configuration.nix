@@ -75,8 +75,7 @@
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
-  # List packages installed in system profile. To search, run:
-  # $ nix search wget
+
   environment.systemPackages = with pkgs; [
    vim 
    wget
@@ -106,6 +105,7 @@
    jetbrains.idea-oss
    jdk25
    lazygit
+   rnote
 ];
 
   programs.git = {
@@ -164,12 +164,46 @@
     };
 
   services.gnome.gnome-keyring.enable = false;
-
+  
  # xdg.portal = {
-##    enable = true;
- #   extraPortals = [ pkgs.xdg-desktop-portal-gnome ];
- #   config.common.default = [ "*" ];
- # }; 
+ # enable = true;
+ # extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+ # config.common.default = [ "gtk" ];
+ # };
+
+  hardware.graphics = {
+  enable = true;
+  enable32Bit = true;
+  # إضافة تعريفات Vulkan و Mesa الضرورية
+  extraPackages = with pkgs; [
+    mesa
+    vulkan-loader
+    vulkan-validation-layers
+    vulkan-extension-layer
+    intel-media-driver # إذا كان كرتك Intel
+    libva-vdpau-driver
+  ];
+};
+
+  services.xserver.videoDrivers = [ "nvidia" ];
+  hardware.nvidia = {
+    modesetting.enable = true;
+    open = false; 
+    nvidiaSettings = true;
+  
+  # هذا الجزء هو الأهم للاب توب الخاص بك (Optimus/Hybrid)
+  prime = {
+    offload = {
+      enable = true;
+      enableOffloadCmd = true;
+    };
+    # ستحتاج للحصول على الـ Bus IDs (استخدم الأمر: nix-shell -p pciutils --run "lspci | grep VGA")
+    # هذا مثال، تأكد من تغيير الأرقام لتطابق جهازك
+    intelBusId = "PCI:0:2:0";
+    nvidiaBusId = "PCI:1:0:0";
+    };
+  };
+
 
   services.keyd = {
     enable = true;
@@ -202,7 +236,6 @@
         };
       };
     };
-
 }
 
 
