@@ -125,6 +125,15 @@
       core.askPass = ""; # هذا سيعطل ظهور نافذة KDE المزعجة
     };
   };
+  
+  programs.steam = {
+    enable = true;
+    remotePlay.openFirewall = true;
+    dedicatedServer.openFirewall = true;
+
+  };
+
+
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
@@ -214,7 +223,6 @@
       nvidiaBusId = "PCI:1:0:0";
     };
   };
-
 
   services.keyd = {
     enable = true;

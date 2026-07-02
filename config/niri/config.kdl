@@ -8,8 +8,16 @@
 // https://niri-wm.github.io/niri/Configuration:-Input
 input {
     keyboard {
+
+	track-layout "global"
+
+
         xkb {
-            // You can set rules, model, layout, variant and options.
+
+            layout "us,ara"
+	    options "grp:alt_shift_toggle,caps:escape"
+	
+	    // You can set rules, model, layout, variant and options.
             // For more information, see xkeyboard-config(7).
 
             // For example:
@@ -23,6 +31,9 @@ input {
 
         // Enable numlock on startup, omitting this setting disables it.
         numlock
+
+	repeat-delay 200
+        repeat-rate 40
     }
 
     // Next sections include libinput settings.
@@ -270,7 +281,8 @@ layout {
 spawn-at-startup "waybar"
 spawn-at-startup "sh" "-c" "awww-daemon & sleep 0.5 && awww img /home/mohx/nano/wallpapers/da.jpg"
 spawn-at-startup "noctalia-shell"
-// To run a shell command (with variables, pipes, etc.), use spawn-sh-at-startup:
+spawn-at-startup "xwayland-satellite"
+// T run a shell command (with variables, pipes, etc.), use spawn-sh-at-startup:
 // spawn-sh-at-startup "qs -c ~/source/qs/MyAwesomeShell"
 
 hotkey-overlay {
@@ -308,6 +320,11 @@ animations {
 // Find more information on the wiki:
 // https://niri-wm.github.io/niri/Configuration:-Window-Rules
 
+window-rule {
+        // ضع هنا الاسم الذي ظهر لك في أمر niri msg windows
+    match app-id="kitty" 
+    opacity 0.5
+}
 // Work around WezTerm's initial configure bug
 // by setting an empty default-column-width.
 window-rule {
@@ -345,8 +362,10 @@ window-rule {
     geometry-corner-radius 12
     clip-to-geometry true
 }
-
+// ابحث عن هذا القسم أو أضفه في نهاية الملف
 binds {
+
+    // Switches to the next keyboard layout
     // Keys consist of modifiers separated by + signs, followed by an XKB key name
     // in the end. To find an XKB name for a particular key, you may use a program
     // like wev.
@@ -359,7 +378,6 @@ binds {
 
     // Mod-Shift-/, which is usually the same as Mod-?,
     // shows a list of important hotkeys.
-    Mod+Shift+Slash { show-hotkey-overlay; }
 
     // Suggested binds for running programs: terminal, app launcher, screen locker.
     Mod+Return hotkey-overlay-title="Open a Terminal: kitty" { spawn "kitty"; }
@@ -629,4 +647,7 @@ binds {
     // Powers off the monitors. To turn them back on, do any input like
     // moving the mouse or pressing any other key.
     Mod+Shift+P { power-off-monitors; }
+
+    // ابحث عن هذا القسم أو أضفه في نهاية الملف
 }
+
