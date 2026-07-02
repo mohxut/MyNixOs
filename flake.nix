@@ -12,10 +12,18 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    noctalia.url = "github:noctalia-dev/noctalia-shell";
+    noctalia ={
+      url = "github:noctalia-dev/noctalia-shell";
+      inputs.nixpkgs.follows = "nixpkgs";
+      };
+
+    zen-browser = {
+      url = "github:youwen5/zen-browser-flake";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
 
   };
-
 outputs = { self, nixpkgs, home-manager , ... }@inputs: {
     nixosConfigurations.nano = nixpkgs.lib.nixosSystem {
 	system = "x86_64-linux";
@@ -36,7 +44,7 @@ outputs = { self, nixpkgs, home-manager , ... }@inputs: {
       ];
     };
 
-    homeConfigurations."mohx" = home-manager.lib.homeManagerConfiguration {
+    homeConfigurations."nano" = home-manager.lib.homeManagerConfiguration {
       pkgs = nixpkgs.legacyPackages.x86_64-linux;
       extraSpecialArgs = { inherit inputs; };
       modules = [ ./home.nix ];

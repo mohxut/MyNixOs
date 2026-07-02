@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, ... }:
+{ config, pkgs, inputs ,... }:
 
 {
   imports =
@@ -75,7 +75,6 @@
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
-
   environment.systemPackages = with pkgs; [
    vim 
    wget
@@ -105,7 +104,9 @@
    jetbrains.idea-oss
    jdk25
    lazygit
+   xwayland-satellite
    rnote
+   inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.default
 ];
 
   programs.git = {
@@ -114,6 +115,15 @@
     core.askPass = ""; # هذا سيعطل ظهور نافذة KDE المزعجة
   };
   };
+  
+  programs.steam = {
+    enable = true;
+    remotePlay.openFirewall = true;
+    dedicatedServer.openFirewall = true;
+
+  };
+
+
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
@@ -203,7 +213,6 @@
     nvidiaBusId = "PCI:1:0:0";
     };
   };
-
 
   services.keyd = {
     enable = true;
