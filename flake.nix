@@ -1,53 +1,44 @@
 {
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-
+    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-26.05";
     home-manager = {
       url = "github:nix-community/home-manager/master";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    
-    niri = {
-      url = "github:sodiboo/niri-flake";
+    zen-browser = {
+      url = "github:0xc000022070/zen-browser-flake";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    noctalia ={
+    noctalia = {
       url = "github:noctalia-dev/noctalia-shell";
       inputs.nixpkgs.follows = "nixpkgs";
+    };
+  };
+
+  outputs = { self, nixpkgs, zen-browser, nixpkgs-unstable, home-manager, ... }@inputs:
+    let
+      system = "x86_64-linux";
+      pkgs = import nixpkgs { inherit system; };
+      unstable = import nixpkgs-unstable { inherit system; };
+      noctalia = import noctalia { inherit system; };
+      zen = import zen-browser { inherit system; };
+    in
+    {
+      nixosConfigurations.nano = nixpkgs.lib.nixosSystem {
+        specialArgs = {
+          inherit inputs pkgs system unstable noctalia zen;
+        };
+        modules = [
+          ./configuration.nix
+        ];
       };
 
-    zen-browser = {
-      url = "github:youwen5/zen-browser-flake";
-      inputs.nixpkgs.follows = "nixpkgs";
+      homeConfigurations."mohx" = home-manager.lib.homeManagerConfiguration {
+        inherit pkgs;
+        extraSpecialArgs = { inherit self; };
+        modules = [ ./home.nix ];
+      };
     };
-
-
-  };
-outputs = { self, nixpkgs, home-manager , ... }@inputs: {
-    nixosConfigurations.nano = nixpkgs.lib.nixosSystem {
-	system = "x86_64-linux";
-
-	specialArgs = { inherit inputs; };
-	modules = [
-            ./configuration.nix
-	    home-manager.nixosModules.default
-            {
-              home-manager = {
-                useGlobalPkgs = true;
-                useUserPackages = true;
-		extraSpecialArgs = { inherit inputs; };
-                users.mohx = ./home.nix;
-		backupFileExtension = "backup" ;
-            };
-	}
-      ];
-    };
-
-    homeConfigurations."nano" = home-manager.lib.homeManagerConfiguration {
-      pkgs = nixpkgs.legacyPackages.x86_64-linux;
-      extraSpecialArgs = { inherit inputs; };
-      modules = [ ./home.nix ];
-    };
-  };
 }
