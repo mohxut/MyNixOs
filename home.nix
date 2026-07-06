@@ -1,9 +1,7 @@
-{ config, pkgs, inputs, ... }:
+{ config, pkgs, ... }:
 
 {
 
-  useGlobalPkgs = true;
-  useUserPackages = true;
 
   home.username = "mohx";
   home.homeDirectory = "/home/mohx";
@@ -27,7 +25,6 @@
 
 
   home.file.".config/nvim".source = ./config/mohxNvim;
-  home.file.".config/niri".source = ./config/niri;
 
   home.sessionVariables = {
     _JAVA_AWT_WM_NONREPARENTING = "1";
@@ -37,4 +34,9 @@
   home.packages = with pkgs; [
     awww
   ];
+
+  xdg.configFile."niri/config.kdl" = {
+  source = ./config/niri/config.kdl; # هذا يشير إلى ملفك الذي نقلناه للتو
+  force = true;               # ضروري جداً لتجنب خطأ clobbered
+};
 }

@@ -20,7 +20,9 @@
   outputs = { self, nixpkgs, zen-browser, nixpkgs-unstable, home-manager, ... }@inputs:
     let
       system = "x86_64-linux";
-      pkgs = import nixpkgs { inherit system; };
+      pkgs = import nixpkgs { inherit system;
+      config.allowUnfree = true; 
+      };
       unstable = import nixpkgs-unstable { inherit system; };
       noctalia = import noctalia { inherit system; };
       zen = import zen-browser { inherit system; };
@@ -35,7 +37,7 @@
         ];
       };
 
-      homeConfigurations."mohx" = home-manager.lib.homeManagerConfiguration {
+      homeConfigurations."nano" = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
         extraSpecialArgs = { inherit self; };
         modules = [ ./home.nix ];
