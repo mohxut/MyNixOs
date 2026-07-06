@@ -79,7 +79,7 @@
 
 
   environment.systemPackages = (with pkgs; [
-    noctalia.noctalia
+    noctalia
     zen.default
     wget
     git

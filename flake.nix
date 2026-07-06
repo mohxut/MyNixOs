@@ -23,9 +23,10 @@
       pkgs = import nixpkgs { inherit system;
       config.allowUnfree = true; 
       };
-      unstable = import nixpkgs-unstable { inherit system; };
-      noctalia = import noctalia { inherit system; };
-      zen = import zen-browser { inherit system; };
+      unstable = import nixpkgs-unstable { inherit system;     
+      config.allowUnfree = true; };
+      zen = import zen-browser { inherit system pkgs; };
+      noctalia = inputs.noctalia.packages.${system}.default;
     in
     {
       nixosConfigurations.nano = nixpkgs.lib.nixosSystem {
