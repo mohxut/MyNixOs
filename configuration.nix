@@ -11,6 +11,10 @@
       ./hardware-configuration.nix
     ];
 
+
+  hardware.bluetooth = {
+    enable = true;
+  };
   # Bootloader.
   boot.loader = {
     efi.canTouchEfiVariables = true;
@@ -73,7 +77,6 @@
     packages = with pkgs; [ ];
   };
 
-  # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
 
@@ -114,6 +117,7 @@
     zoxide
     fuzzel
     rnote
+    xwayland-satellite
   ]) ++ (with unstable ; [
     neovim
     discord
@@ -160,7 +164,8 @@
   # this value at the release version of the first install of this system.
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system.stateVersion = "25.11"; # Did you read the comment?
+  
+  system.stateVersion = "25.11"; 
 
   #UI*****************************************
   services.displayManager.sddm.enable = false;
@@ -205,20 +210,19 @@
     ];
   };
 
+  services.power-profiles-daemon.enable = true;
+
   services.xserver.videoDrivers = [ "nvidia" ];
   hardware.nvidia = {
     modesetting.enable = true;
     open = false;
     nvidiaSettings = true;
 
-    # هذا الجزء هو الأهم للاب توب الخاص بك (Optimus/Hybrid)
     prime = {
       offload = {
         enable = true;
         enableOffloadCmd = true;
       };
-      # ستحتاج للحصول على الـ Bus IDs (استخدم الأمر: nix-shell -p pciutils --run "lspci | grep VGA")
-      # هذا مثال، تأكد من تغيير الأرقام لتطابق جهازك
       intelBusId = "PCI:0:2:0";
       nvidiaBusId = "PCI:1:0:0";
     };

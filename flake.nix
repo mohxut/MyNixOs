@@ -40,7 +40,7 @@
 
       homeConfigurations."nano" = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
-        extraSpecialArgs = { inherit self; };
+        extraSpecialArgs = { inherit self inputs ; };
         modules = [ ./home.nix ];
       };
     };

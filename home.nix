@@ -1,28 +1,14 @@
 { config, pkgs, ... }:
 
 {
-
-
   home.username = "mohx";
   home.homeDirectory = "/home/mohx";
   home.stateVersion = "25.05";
   programs.git.enable = true;
 
-  # programs.niri.settings = {
-  #   spawn-at-startup = [
-  #     { command = [ "${pkgs.xwayland-satellite}/bin/xwayland-satellite" ":0" ]; }
-  #   ];
-  # };
-
-  #
-  # programs.bash = {
-  #     enable = true;
-  #     shellAliases = {
-  #                 };
-  # };
-
   programs.zoxide.enable = true;
 
+  home.enableNixpkgsReleaseCheck = false;
 
   home.file.".config/nvim".source = ./config/mohxNvim;
 

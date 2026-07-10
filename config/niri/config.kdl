@@ -171,6 +171,11 @@ layout {
 
         // How many logical pixels the ring extends out from the windows.
         width 4
+        // اللون الرمادي الافتراضي هو "#505050"، قم بتغييره إلى:
+        inactive-color "transparent" 
+        
+        // أو يمكنك استخدام تدرج لوني يتماشى مع خلفيتك بدلاً من الشفافية:
+        // inactive-gradient from="#0f1c2e" to="#1f3a5f" angle=45
 
         // Colors can be set in a variety of ways:
         // - CSS named colors: "red"
@@ -184,7 +189,6 @@ layout {
         //
         // The focus ring only draws around the active window, so the only place
         // where you can see its inactive-color is on other monitors.
-        inactive-color "#505050"
 
         // You can also use gradients. They take precedence over solid colors.
         // Gradients are rendered the same as CSS linear-gradient(angle, from, to).
