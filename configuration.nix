@@ -129,6 +129,18 @@
     discord
   ]);
 
+
+  programs.git = {
+    enable = true;
+    config = {
+      core.askPass = ""; # هذا سيعطل ظهور نافذة KDE المزعجة
+    };
+  };
+  
+
+
+
+
   programs.steam = {
     enable = true;
     remotePlay.openFirewall = true;
