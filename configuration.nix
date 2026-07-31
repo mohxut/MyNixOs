@@ -67,6 +67,8 @@
     variant = "";
   };
 
+  services.flatpak.enable = true;
+
 
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
@@ -118,18 +120,15 @@
     fuzzel
     rnote
     xwayland-satellite
+    dotnetCorePackages.sdk_10_0
+    nautilus
+    gparted
+    prismlauncher
   ]) ++ (with unstable ; [
     neovim
     discord
   ]);
 
-  programs.git = {
-    enable = true;
-    config = {
-      core.askPass = ""; # هذا سيعطل ظهور نافذة KDE المزعجة
-    };
-  };
-  
   programs.steam = {
     enable = true;
     remotePlay.openFirewall = true;
@@ -167,6 +166,8 @@
   
   system.stateVersion = "25.11"; 
 
+  services.gvfs.enable = true;  #to  browse network filesystems and access the   trash folder on nautilus , genom fill manager . 
+
   #UI*****************************************
   services.displayManager.sddm.enable = false;
   services.displayManager.ly = {
@@ -190,22 +191,15 @@
 
   services.gnome.gnome-keyring.enable = false;
 
-  # xdg.portal = {
-  # enable = true;
-  # extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
-  # config.common.default = [ "gtk" ];
-  # };
-
   hardware.graphics = {
     enable = true;
     enable32Bit = true;
-    # إضافة تعريفات Vulkan و Mesa الضرورية
     extraPackages = with pkgs; [
       mesa
       vulkan-loader
       vulkan-validation-layers
       vulkan-extension-layer
-      intel-media-driver # إذا كان كرتك Intel
+      intel-media-driver 
       libva-vdpau-driver
     ];
   };
