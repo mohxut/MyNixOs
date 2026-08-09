@@ -109,7 +109,7 @@
     proton-vpn
     nodejs
     home-manager
-    jetbrains.idea-oss
+    jetbrains.idea
     jdk25
     lazygit
     ripgrep
