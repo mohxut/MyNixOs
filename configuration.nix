@@ -117,6 +117,7 @@
     nil
     duf
     zoxide
+    libreoffice
     fuzzel
     rnote
     xwayland-satellite
