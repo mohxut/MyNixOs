@@ -124,7 +124,9 @@
     dotnetCorePackages.sdk_10_0
     nautilus
     gparted
-    prismlauncher
+    gnumake
+    prismlauncher]
+    ripgrep
   ]) ++ (with unstable ; [
     neovim
     discord
