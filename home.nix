@@ -10,7 +10,7 @@
 
   home.enableNixpkgsReleaseCheck = false;
 
-  home.file.".config/nvim".source = ./config/mohxNvim;
+  #home.file.".config/nvim".source = ./config/mohxNvimC;
 
   home.sessionVariables = {
     _JAVA_AWT_WM_NONREPARENTING = "1";

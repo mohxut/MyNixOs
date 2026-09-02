@@ -125,7 +125,7 @@
     nautilus
     gparted
     gnumake
-    prismlauncher]
+    prismlauncher
     ripgrep
   ]) ++ (with unstable ; [
     neovim
