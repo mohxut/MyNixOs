@@ -68,14 +68,15 @@
   };
 
   services.flatpak.enable = true;
-
+  
+  security.polkit.enable = true;
 
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.mohx = {
     isNormalUser = true;
     description = "mohx";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ "networkmanager" "wheel" "video" "wireshark" ];
     packages = with pkgs; [ ];
   };
 
@@ -84,6 +85,8 @@
 
 
   environment.systemPackages = (with pkgs; [
+    audacity
+    cheese
     noctalia
     zen.default
     wget
@@ -102,11 +105,14 @@
     bat
     obsidian
     yazi
+    imagemagick
     telegram-desktop
     discord
     keyd
     tmux
+    polkit_gnome
     proton-vpn
+    pkgs.net-tools
     nodejs
     home-manager
     jetbrains.idea
@@ -114,10 +120,15 @@
     lazygit
     ripgrep
     dust
-    nil
+    nmap
+    nil 
+    wireshark
     duf
+    obs-studio
     zoxide
     libreoffice
+    mpv
+    vlc
     fuzzel
     rnote
     xwayland-satellite
@@ -140,7 +151,7 @@
     };
   };
   
-
+programs.wireshark.enable = true;
 
 
 

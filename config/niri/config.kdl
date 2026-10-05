@@ -283,6 +283,9 @@ spawn-at-startup "waybar"
 spawn-at-startup "sh" "-c" "awww-daemon & sleep 0.5 && awww img /home/mohx/nano/wallpapers/da.jpg"
 spawn-at-startup "noctalia"
 spawn-at-startup "xwayland-satellite"
+spawn-at-startup "/run/current-system/sw/libexec/polkit-gnome-authentication-agent-1"
+
+
 // T run a shell command (with variables, pipes, etc.), use spawn-sh-at-startup:
 // spawn-sh-at-startup "qs -c ~/source/qs/MyAwesomeShell"
 
@@ -397,7 +400,10 @@ binds {
 
     Ctrl+Alt+P hotkey-overlay-title="Run an Application: Fierfox"  { spawn "protonvpn-app"; }
 
-    
+    Ctrl+Alt+B hotkey-overlay-title="Run an Application: obsidian"  { spawn "obsidian"; }
+
+
+
     Super+Alt+L hotkey-overlay-title="Lock the Screen: swaylock" { spawn "swaylock"; }
 
     // Use spawn-sh to run a shell command. Do this if you need pipes, multiple commands, etc.
