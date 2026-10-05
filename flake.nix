@@ -15,6 +15,10 @@
       url = "github:noctalia-dev/noctalia-shell";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+   tincan-cli = {
+      url = "github:bilalyazicioglu/tincan-cli/develop";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = { self, nixpkgs, zen-browser, nixpkgs-unstable, home-manager, ... }@inputs:
@@ -27,11 +31,13 @@
       config.allowUnfree = true; };
       zen = import zen-browser { inherit system pkgs; };
       noctalia = inputs.noctalia.packages.${system}.default;
+      tincan = inputs.tincan.packages.${system}.default;
+
     in
     {
       nixosConfigurations.nano = nixpkgs.lib.nixosSystem {
         specialArgs = {
-          inherit inputs pkgs system unstable noctalia zen;
+          inherit inputs pkgs system unstable noctalia zen tincan;
         };
         modules = [
           ./configuration.nix
