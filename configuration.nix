@@ -35,9 +35,14 @@
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
   networking.hostName = "mohx";
   networking.networkmanager.enable = true;
-
+  
+  nix.settings = {
+  extra-substituters = [ "https://noctalia.cachix.org" ];
+  extra-trusted-public-keys = [ "noctalia.cachix.org-1:pCOR47nnMEo5thcxNDtzWpOxNFQsBRglJzxWPp3dkU4=" ];
+  };
+  
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
-
+  services.upower.enable = true;
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
@@ -69,7 +74,10 @@
 
   services.flatpak.enable = true;
   
+  services.udev.packages = [ pkgs.heimdall ];
+
   security.polkit.enable = true;
+
 
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
@@ -114,7 +122,10 @@
     polkit_gnome
     proton-vpn
     pkgs.net-tools
+    cisco-packet-tracer_9
     nodejs
+    heimdall
+    heimdall-gui
     home-manager
     jetbrains.idea
     jdk25
@@ -127,11 +138,16 @@
     duf
     obs-studio
     zoxide
+    logisim
     libreoffice
+    findutils
     mpv
     vlc
     fuzzel
     rnote
+    tree-sitter
+    gcc
+    unzip
     xwayland-satellite
     dotnetCorePackages.sdk_10_0
     nautilus
@@ -140,8 +156,8 @@
     prismlauncher
     ripgrep
   ]) ++ (with unstable ; [
-    neovim
-    discord
+      neovim
+      discord
   ]);
 
 

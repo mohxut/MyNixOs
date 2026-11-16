@@ -31,6 +31,11 @@
         avatarImage = "/home/mohx/.face";
         radiusRatio = 0.2;
       };
+
+      wallpaper = {
+        enable = false;
+      };
+
       location = {
         monthBeforeDay = true;
         name = "Damascus, Syria"; # set to whatever you actually want here

@@ -13,11 +13,11 @@
 
     noctalia = {
       url = "github:noctalia-dev/noctalia-shell";
-      inputs.nixpkgs.follows = "nixpkgs";
+      ##inputs.nixpkgs.follows = "nixpkgs";
     };
    tincan-cli = {
       url = "github:bilalyazicioglu/tincan-cli/develop";
-      inputs.nixpkgs.follows = "nixpkgs";
+      ## inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
@@ -31,7 +31,7 @@
       config.allowUnfree = true; };
       zen = import zen-browser { inherit system pkgs; };
       noctalia = inputs.noctalia.packages.${system}.default;
-      tincan = inputs.tincan.packages.${system}.default;
+      tincan = inputs.tincan-cli.packages.${system}.default;
 
     in
     {

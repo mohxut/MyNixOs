@@ -280,7 +280,6 @@ layout {
 
 // This line starts waybar, a commonly used bar for Wayland compositors.
 spawn-at-startup "waybar"
-spawn-at-startup "sh" "-c" "awww-daemon & sleep 0.5 && awww img /home/mohx/nano/wallpapers/da.jpg"
 spawn-at-startup "noctalia"
 spawn-at-startup "xwayland-satellite"
 spawn-at-startup "/run/current-system/sw/libexec/polkit-gnome-authentication-agent-1"

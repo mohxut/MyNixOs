@@ -21,11 +21,16 @@
   home.packages = with pkgs; [
     awww
     adwaita-qt6
+    mpvpaper
+    swww
+    logisim
+    flutter
+    gradle
   ];
 
   xdg.configFile."niri/config.kdl" = {
-  source = ./config/niri/config.kdl; # هذا يشير إلى ملفك الذي نقلناه للتو
-  force = true;               # ضروري جداً لتجنب خطأ clobbered
+  source = ./config/niri/config.kdl; 
+  force = true;
 };
 qt = {
   enable = true;
